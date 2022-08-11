@@ -52,9 +52,9 @@ stages:
         artifact: 'drop'
         publishLocation: 'pipeline'
 
-- stage: Build
+- stage: Release
   jobs:
-  - job: Build
+  - job: Release
 
 
     pool:
