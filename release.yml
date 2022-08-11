@@ -79,5 +79,4 @@ stages:
           --resource-group $(ResourceGroupName) `
           --template-file
           $(System.ArtifactsDirectory)/Bicep/TailspinResources.bicep `
-          --parameters websiteName=$(WebsiteName)
-          hostingPlanName=$(HostingPlan)
+          --parameters websiteName=$(WebsiteName) hostingPlanName=$(HostingPlan)
