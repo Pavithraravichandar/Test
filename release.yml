@@ -77,6 +77,5 @@ stages:
           az deployment group create `
           --name $(Build.BuildNumber) `
           --resource-group $(ResourceGroupName) `
-          --template-file
-          $(System.ArtifactsDirectory)/Bicep/TailspinResources.bicep `
+          --template-file $(System.ArtifactsDirectory)/Bicep/TailspinResources.bicep `
           --parameters websiteName=$(WebsiteName) hostingPlanName=$(HostingPlan)
