@@ -34,9 +34,9 @@ resource devSlot 'Microsoft.Web/sites/slots@2016-08-01' = {
   properties: {
     serverFarmId: appServicePlan.id
   }
- // dependsOn:[
- //   appServiceApp
- // ]
+  dependsOn:[
+   appServiceApp
+  ]
 }
 
 resource stagingSlot 'Microsoft.Web/sites/slots@2016-08-01' = {
@@ -49,9 +49,9 @@ resource stagingSlot 'Microsoft.Web/sites/slots@2016-08-01' = {
   properties: {
     serverFarmId: appServicePlan.id
   }
- // dependsOn:[
- //   appServiceApp
- // ]
+ dependsOn:[
+   appServiceApp
+ ]
 }
 
 //create the app insights
@@ -66,9 +66,9 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
   }
-  //dependsOn:[
-  //  appServiceApp
- // ]
+dependsOn:[
+ appServiceApp
+]
 }
 
 resource appInsightsDev 'Microsoft.Insights/components@2020-02-02' = {
@@ -82,9 +82,9 @@ resource appInsightsDev 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
   }
- // dependsOn:[
- //   devSlot
- // ]
+ dependsOn:[
+   devSlot
+ ]
 }
 
 resource appInsightsStaging 'Microsoft.Insights/components@2020-02-02' = {
@@ -98,8 +98,8 @@ resource appInsightsStaging 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
   }
-//  dependsOn:[
- //   stagingSlot
- // ]
+dependsOn:[
+  stagingSlot
+  ]
 }
 
