@@ -59,7 +59,6 @@ stages:
   - job: DeployBicep
     displayName: Deploy Bicep
 
-
     pool:
       vmImage: 'windows-latest'
 
@@ -89,13 +88,46 @@ stages:
     pool:
       vmImage: 'windows-latest'
 
-    - task: AzureRmWebAppDeployment@4
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'PAVR RDC Internal Subscription(37ef8c03-e8ac-4ea3-91dd-f5ab71cd09d3)'
-        appType: 'webApp'
-        WebAppName: '$(WebsiteName)'
-        packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
+    environment: 'dev'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'PAVR RDC Internal Subscription(37ef8c03-e8ac-4ea3-91dd-f5ab71cd09d3)'
+              appType: 'webApp'
+              WebAppName: '$(WebsiteName)'
+              deployToSlotOrASE: true
+              ResourceGroupName: $(ResourceGroupName)
+              SlotName: Dev
+              packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
+
+  - deployment: DeployToStage
+    displayName: Deploy To Stage
+
+
+    pool:
+      vmImage: 'windows-latest'
+
+    environment: 'Stage'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'PAVR RDC Internal Subscription(37ef8c03-e8ac-4ea3-91dd-f5ab71cd09d3)'
+              appType: 'webApp'
+              WebAppName: '$(WebsiteName)'
+              deployToSlotOrASE: true
+              ResourceGroupName: $(ResourceGroupName)
+              SlotName: Staging
+              packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
 
 - stage: DeployProd
   displayName: Deploy Prod
@@ -105,3 +137,17 @@ stages:
 
     pool:
       vmImage: 'windows-latest'
+
+    environment: 'Prod'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'PAVR RDC Internal Subscription(37ef8c03-e8ac-4ea3-91dd-f5ab71cd09d3)'
+              appType: 'webApp'
+              WebAppName: 'tailspinpavrws'
+              packageForLinux: '$(Pipeline.Workspacey)/**/*.zip'
