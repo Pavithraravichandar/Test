@@ -9,7 +9,7 @@ trigger:
 resources:
   pipelines:
     - pipeline: BuildContosoAir
-      source: githubcontosoAir
+      source: cicontoso
 
       trigger:
         branches:
