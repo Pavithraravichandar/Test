@@ -150,4 +150,4 @@ stages:
               azureSubscription: 'PAVR RDC Internal Subscription(37ef8c03-e8ac-4ea3-91dd-f5ab71cd09d3)'
               appType: 'webApp'
               WebAppName: 'tailspinpavrws'
-              packageForLinux: '$(Pipeline.Workspacey)/**/*.zip'
+              packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
