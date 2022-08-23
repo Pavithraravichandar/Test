@@ -68,6 +68,13 @@ stages:
         artifactName: 'drop'
         targetPath: '$(System.ArtifactsDirectory)'
 
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'Test'
+        KeyVaultName: 'optionIt'
+        SecretsFilter: '*'
+        RunAsPreJob: false
+
     - task: AzureCLI@2
       inputs:
         azureSubscription: 'PAVR RDC Internal Subscription(37ef8c03-e8ac-4ea3-91dd-f5ab71cd09d3)'
